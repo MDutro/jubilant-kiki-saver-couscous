@@ -18,7 +18,7 @@ function Main({onLogin}){
           </p>
         </article>
         <button onClick={()=> onLogin('login')}>
-            Login
+        Login
         </button>
     </main>
   )

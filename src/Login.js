@@ -1,6 +1,8 @@
 import React from 'react'
 
-function Login(){
+function Login({onSuccess, loginError }) {
+    console.log(loginError);
+    
     return(
     <main>
         <h1>Login</h1>
@@ -25,7 +27,10 @@ function Login(){
         <section className="login-button">
             <p>Don't have an account?</p>
             <a href="/signup"><button className="btn">Sign up!</button></a>
-        </section>
+            </section>
+            <button onClick={ () => loginError('error') }>
+            Error
+        </button>
     </main>
     )
 }
