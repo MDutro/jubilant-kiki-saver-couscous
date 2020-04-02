@@ -21,7 +21,7 @@ function Main({onLogin}){
             Signup
         </button>
         <button onClick={()=> onLogin('login')}>
-            Login
+        Login
         </button>
     </main>
   )
