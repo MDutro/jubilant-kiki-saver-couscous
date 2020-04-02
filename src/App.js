@@ -2,6 +2,7 @@ import React from 'react'
 import Main from './Main'
 import Login from './Login'
 import Success from './Success'
+import './App.css'
 
 class App extends React.Component {
   constructor(props){
