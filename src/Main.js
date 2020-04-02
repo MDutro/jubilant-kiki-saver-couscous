@@ -1,17 +1,13 @@
 import React from 'react'
 import logo from './logo.png'
+import Header from './Header'
 import './App.css'
 
 
 function Main({onLogin}){
   return(
     <main>
-      <header>
-        <img src={logo} />
-        <h1>
-        Welcome MS Coding Academy Students!
-        </h1>
-      </header>
+      <Header />
       <article>
           <p>
           Please log your attendance today.
@@ -21,7 +17,7 @@ function Main({onLogin}){
             Signup
         </button>
         <button onClick={()=> onLogin('login')}>
-            Login
+        Login
         </button>
     </main>
   )
