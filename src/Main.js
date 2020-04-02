@@ -17,7 +17,7 @@ function Main({onLogin}){
           Please log your attendance today.
           </p>
         </article>
-        <button onClick={()=> console.log(onLogin('success'))}>
+        <button onClick={()=> onLogin('login')}>
             Login
         </button>
     </main>
