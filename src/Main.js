@@ -17,6 +17,9 @@ function Main({onLogin}){
           Please log your attendance today.
           </p>
         </article>
+        <button onClick={()=> onLogin('signup')}>
+            Signup
+        </button>
         <button onClick={()=> onLogin('login')}>
         Login
         </button>

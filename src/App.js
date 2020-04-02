@@ -4,6 +4,7 @@ import Login from './Login'
 import Success from './Success'
 import LoginError from './LoginError'
 import './App.css'
+import Signup from './Signup'
 
 class App extends React.Component {
     constructor(props) {
@@ -18,7 +19,7 @@ class App extends React.Component {
             route: newRoute
         })
     }
-
+    
     render() {
         switch (this.state.route) {
             case 'main':
@@ -29,6 +30,8 @@ class App extends React.Component {
                 return <Login onSuccess={this.setRoute} loginError = { this.setRoute } />
             case 'error':
                 return <LoginError onLogin={this.setRoute} loginError = { this.setRoute } />
+            case 'signup':
+                return <Signup onSignup={this.setRoute} />
         }
     }
 }
