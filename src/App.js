@@ -2,7 +2,9 @@ import React from 'react'
 import Main from './Main'
 import Login from './Login'
 import Success from './Success'
+
 import './App.css'
+import Signup from './Signup'
 
 class App extends React.Component {
   constructor(props){
@@ -26,6 +28,8 @@ class App extends React.Component {
       return <Success onLogout={this.setRoute} />
     case 'login':
       return <Login onSuccess={this.setRoute} />
+    case 'signup':
+      return <Signup onSignup={this.setRoute} />
     }
   }
 }
