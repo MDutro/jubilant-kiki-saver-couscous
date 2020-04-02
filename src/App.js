@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.png'
-import './App.css';
+import Main from './Main'
+import Success from './Success'
 
-function App() {
-  return (
-    <main>
-      {/* <Header /> */}
-      <header>
-        <img src={logo} />
-        <h1>
-        Header component here
-        </h1>
-      </header>
+class App extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      route: 'main'
+    }
+  }
 
-      {/* <Section /> */}
-      <article>
-        <p>
-        Section component here with buttons components
-        </p>
-      </article>
-    </main>
-  );
+  setRoute = (newRoute) => {
+    this.setState({
+      route: newRoute
+    })
+  }
+
+  render(){
+    switch(this.state.route){
+    case 'main':
+      return <Main onLogin={this.setRoute}/> 
+    case 'success':     
+      return <Success onLogout={this.setRoute} />
+    }
+  }
 }
 
 export default App;
