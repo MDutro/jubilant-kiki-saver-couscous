@@ -3,7 +3,7 @@ import Main from './Main'
 import Login from './Login'
 import Success from './Success'
 import LoginError from './LoginError'
-import './App.css'
+import './index.css';
 import Signup from './Signup'
 
 class App extends React.Component {
