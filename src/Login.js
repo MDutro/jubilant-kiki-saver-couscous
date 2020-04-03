@@ -1,10 +1,12 @@
 import React from 'react'
+import Header from './Header'
 
 function Login({onSuccess, loginError }) {
     console.log(loginError);
     
     return(
     <main>
+        <Header />
         <h1>Login</h1>
         <form action="/login" method="post" id="login" className="col" encType="multipart/form-data">
             <div className="col">
