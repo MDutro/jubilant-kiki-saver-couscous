@@ -11,5 +11,4 @@ function Main({onLogin}){
     </main>
   )
 }
-
 export default Main

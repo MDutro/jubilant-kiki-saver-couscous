@@ -1,5 +1,5 @@
 import React from 'react'
-import Main from './Main'
+import Main from './Landing'
 import Login from './Login'
 import Success from './Success'
 import LoginError from './LoginError'
@@ -32,6 +32,8 @@ class App extends React.Component {
                 return <LoginError onLogin={this.setRoute} loginError = { this.setRoute } />
             case 'signup':
                 return <Signup onSignup={this.setRoute} />
+            default :
+                return <div>404</div>
         }
     }
 }
