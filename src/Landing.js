@@ -7,7 +7,7 @@ function Main({onLogin}){
   return(
     <main>
       <Header />
-      <Section onLogin={something}/> 
+      <Section onLogin={onLogin}/> 
     </main>
   )
 }
