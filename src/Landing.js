@@ -1,25 +1,14 @@
 import React from 'react'
 import Header from './Header'
 import './App.css'
-
+import Section from './Section'
 
 function Main({onLogin}){
   return(
     <main>
       <Header />
-      <article>
-          <p>
-          Please log your attendance today.
-          </p>
-        </article>
-        <button onClick={()=> onLogin('signup')}>
-            Signup
-        </button>
-        <button onClick={()=> onLogin('login')}>
-        Login
-        </button>
+      <Section onLogin={something}/> 
     </main>
   )
 }
-
 export default Main
