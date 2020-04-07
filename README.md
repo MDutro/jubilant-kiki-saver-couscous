@@ -1,3 +1,7 @@
+### Source.env
+
+To run server on correct port create a file `.env` containing `PORT=3001`. Before running `npm start` run the command `source .env` in your app directory.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
