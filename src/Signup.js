@@ -21,7 +21,15 @@ class Signup extends React.Component {
        })
     }
     handleSubmit = async () => {
-        const response = await fetch('http://localhost:3000/signup', { method: 'POST', body: this.state });
+        console.log(this.state);
+        const formData = new FormData();
+        formData.append('username', this.state.username);
+        formData.append('password', this.state.password);
+        formData.append('verifyPassword', this.state.verifyPassword);
+        formData.append('firstName', this.state.firstName);
+        formData.append('lastName', this.state.lastName);
+        formData.append('phone', this.state.phone);
+        const response = await fetch('http://localhost:3000/signup', { method: 'POST', body: formData });
         console.log(response);
         
     }
@@ -57,7 +65,7 @@ class Signup extends React.Component {
                             <input onChange={this.handleChange} type="tel" name="phone" id="phone" placeholder="Enter a your phone number without hyphens" value={this.state.phone} required />
                         </div>
                     </form>
-                    <button className="btn" onClick={this.handleSubmit}>Submit New</button>
+                    <button className="btn" onClick={this.handleSubmit} disabled={this.state.password!==this.state.verifyPassword}>Submit New</button>
                     <p>Already have an account?</p>
                     <a href="/login"><button className="btn">Sign in!</button></a>
                 </main>
