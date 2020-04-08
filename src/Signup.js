@@ -30,9 +30,13 @@ class Signup extends React.Component {
         formData.append('lastName', this.state.lastName);
         formData.append('phone', this.state.phone);
         const response = await fetch('http://localhost:3000/signup', { method: 'POST', body: formData });
-        console.log(response);
-        
+        console.log(response);  
     }
+
+    checkPassword = ()=> {
+        return this.state.password===this.state.verifyPassword
+    }
+
     render() {
         return(
             <div>
@@ -65,7 +69,13 @@ class Signup extends React.Component {
                             <input onChange={this.handleChange} type="tel" name="phone" id="phone" placeholder="Enter a your phone number without hyphens" value={this.state.phone} required />
                         </div>
                     </form>
-                    <button className="btn" onClick={this.handleSubmit} disabled={this.state.password!==this.state.verifyPassword}>Submit New</button>
+                    <button 
+                        className="btn" 
+                        style={(this.checkPassword()&&this.state.password)? undefined :{'background': 'palevioletred'}}
+                        onClick={this.handleSubmit} 
+                        disabled={this.state.password!==this.state.verifyPassword}>
+                        {(this.checkPassword()&&this.state.password)?'Submit':'Passwords Must Match'}
+                    </button>
                     <p>Already have an account?</p>
                     <a href="/login"><button className="btn">Sign in!</button></a>
                 </main>
