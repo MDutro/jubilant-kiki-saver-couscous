@@ -19,6 +19,11 @@ class App extends React.Component {
             route: newRoute
         })
     }
+
+    onSuccessfulLogin = () => {
+        this.setRoute('success')
+        console.log('login success')
+    }
     
     render() {
         switch (this.state.route) {
@@ -27,7 +32,7 @@ class App extends React.Component {
             case 'success':
                 return <Success onLogout = { this.setRoute } />
             case 'login':
-                return <Login onSuccess={this.setRoute} loginError = { this.setRoute } />
+                return <Login loginSuccess = {this.onSuccessfulLogin} onSuccess={this.setRoute} loginError = { this.setRoute } /> 
             case 'error':
                 return <LoginError onLogin={this.setRoute} loginError = { this.setRoute } />
             case 'signup':

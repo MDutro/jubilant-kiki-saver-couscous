@@ -46,6 +46,8 @@ class Login extends React.Component {
             this.setState({
                 isBadPassword: true
             })
+        }else if(response.status === 200) {
+            this.props.loginSuccess()
         }
         console.log(response);
         
