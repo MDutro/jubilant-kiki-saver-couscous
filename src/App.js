@@ -13,6 +13,7 @@ class App extends React.Component {
             route: 'main',
             user: null
         }
+        this.initialState = this.state
     }
 
     setRoute = (newRoute) => {
@@ -27,13 +28,19 @@ class App extends React.Component {
         })
         this.setRoute('success')
     }
+
+    onLogout = () => {
+        this.setState(this.initialState)
+        this.setRoute('main')
+        console.log(this.state)
+    }
     
     render() {
         switch (this.state.route) {
             case 'main':
                 return <Main onLogin = { this.setRoute } /> 
             case 'success':
-                return <Success user = {this.state.user} onLogout = { this.setRoute } />
+                return <Success user = {this.state.user} onLogout = {this.onLogout} />
             case 'login':
                 return <Login loginSuccess = {this.onSuccessfulLogin} onSuccess={this.setRoute} loginError = { this.setRoute } /> 
             case 'error':
