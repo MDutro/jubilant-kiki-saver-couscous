@@ -9,7 +9,8 @@ class Login extends React.Component {
             username: '',
             password: '',
             selfie: '',
-            gps: ''
+            gps: '',
+            isBadPassword: false
         }
     }
     componentDidMount() {
@@ -29,6 +30,7 @@ class Login extends React.Component {
         })
     }
     handleSubmit = async () => {
+        
         const formData = new FormData();
         formData.append('username', this.state.username);
         formData.append('password', this.state.password);
@@ -40,6 +42,11 @@ class Login extends React.Component {
             method: 'POST',
             body: formData
         });
+        if(response.status === 401) {
+            this.setState({
+                isBadPassword: true
+            })
+        }
         console.log(response);
         
     }
@@ -71,7 +78,9 @@ class Login extends React.Component {
                     </div>
                 </form>
                 <button className="btn" onClick={this.handleSubmit}>Login</button>
+                <div>{this.state.isBadPassword&&'Incorrect Password'}</div>
                 <section className="login-button">
+
                     <p>Don't have an account?</p>
                     <a href="/signup"><button className="btn">Sign up!</button></a>
                     </section>
