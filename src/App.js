@@ -10,7 +10,8 @@ class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            route: 'main'
+            route: 'main',
+            user: null
         }
     }
 
@@ -20,9 +21,11 @@ class App extends React.Component {
         })
     }
 
-    onSuccessfulLogin = () => {
+    onSuccessfulLogin = (user) => {
+        this.setState({
+            user: user
+        })
         this.setRoute('success')
-        console.log('login success')
     }
     
     render() {
@@ -30,7 +33,7 @@ class App extends React.Component {
             case 'main':
                 return <Main onLogin = { this.setRoute } /> 
             case 'success':
-                return <Success onLogout = { this.setRoute } />
+                return <Success user = {this.state.user} onLogout = { this.setRoute } />
             case 'login':
                 return <Login loginSuccess = {this.onSuccessfulLogin} onSuccess={this.setRoute} loginError = { this.setRoute } /> 
             case 'error':
