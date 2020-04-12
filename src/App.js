@@ -30,7 +30,9 @@ class App extends React.Component {
     }
 
     onLogout = () => {
-        this.setState(this.initialState)
+        this.setState(() => {
+            return this.state.user = null
+        })
         this.setRoute('main')
         console.log(this.state)
     }
