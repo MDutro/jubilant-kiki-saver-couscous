@@ -3,11 +3,12 @@ import Header from './Header'
 
 function Success({onLogout, user}){
     return(
-      <main>
+      <main id="container">
         <Header />
         <h1>Login Successful!</h1>
-        <p><span id='username'>Hey {user.username}!</span> Your attendance has been logged at <span id='timestamp'>12:00 pm</span></p>
-        <button onClick={() =>onLogout('main')}>
+        <p>Hey {user.username}! Your attendance has been logged at 12:00 p.m.</p>
+        <img src="" alt="Your uploaded selfie image" />
+        <button className="btn" onClick={() =>onLogout('main')}>
             logout
         </button>
       </main>

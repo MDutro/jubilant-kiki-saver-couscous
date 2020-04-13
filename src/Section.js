@@ -45,7 +45,6 @@ const Section = styled(unstyledSection)`
     border-radius: 3px;
     align-self: center;
 }
-
 `
 
 export default Section

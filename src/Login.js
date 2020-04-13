@@ -59,7 +59,7 @@ class Login extends React.Component {
     }
     render() {
         return(
-            <main>
+            <main id="container">
                 <Header />
                 <h1>Login</h1>
                 <form method="post" id="login" className="col" encType="multipart/form-data">
@@ -82,7 +82,8 @@ class Login extends React.Component {
                 <button className="btn" onClick={this.handleSubmit}>Login</button>
                 <div>{this.state.isBadPassword&&'Incorrect Password'}</div>
                 <section className="login-button">
-
+                    <p>Forgot your password?</p>
+                    <a href="/reset-password"><button className="btn">Reset Password!</button></a>                    
                     <p>Don't have an account?</p>
                     <a href="/signup"><button className="btn">Sign up!</button></a>
                     </section>
