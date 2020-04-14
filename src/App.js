@@ -5,6 +5,7 @@ import Success from './Success'
 import LoginError from './LoginError'
 import './index.css';
 import Signup from './Signup'
+import ResetPassword from './ResetPassword'
 
 class App extends React.Component {
     constructor(props) {
@@ -44,11 +45,13 @@ class App extends React.Component {
             case 'success':
                 return <Success user = {this.state.user} onLogout = {this.onLogout} />
             case 'login':
-                return <Login loginSuccess = {this.onSuccessfulLogin} onSuccess={this.setRoute} loginError = { this.setRoute } /> 
+                return <Login loginSuccess = {this.onSuccessfulLogin} setRoute={this.setRoute} /> 
             case 'error':
                 return <LoginError onLogin={this.setRoute} loginError = { this.setRoute } />
             case 'signup':
                 return <Signup onSignup={this.setRoute} />
+            case 'reset':
+                return <ResetPassword />    
             default :
                 return <div>404</div>
         }

@@ -5,7 +5,7 @@ import logo from './logo.png'
 function unstyledHeader(){
     return(
       <header id="banner">
-        <img id="logo" src={logo} />
+        <img id="logo" src={logo} alt=""/>
         <h1>
         Welcome MS Coding Academy Students!
         </h1>

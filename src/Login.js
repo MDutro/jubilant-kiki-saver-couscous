@@ -83,11 +83,11 @@ class Login extends React.Component {
                 <div>{this.state.isBadPassword&&'Incorrect Password'}</div>
                 <section className="login-button">
                     <p>Forgot your password?</p>
-                    <a href="/reset-password"><button className="btn">Reset Password!</button></a>                    
+                    <button onClick={() => this.props.setRoute('reset')} className="btn">Reset Password!</button>                   
                     <p>Don't have an account?</p>
-                    <a href="/signup"><button className="btn">Sign up!</button></a>
+                    <button onClick={() => this.props.setRoute('signup')} className="btn">Sign up!</button>
                     </section>
-                    <button onClick={ () => this.props.loginError('error') }>
+                    <button onClick={ () => this.props.setRoute('error') }>
                     Error
                 </button>
             </main>
