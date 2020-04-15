@@ -1,99 +1,87 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import Header from './Header'
 /* onSuccess, loginError */
-class Login extends React.Component {
-    /* console.log(loginError); */
-    constructor(props) {
-        super(props)
-        this.state = {
-            username: '',
-            password: '',
-            selfie: '',
-            gps: '',
-            isBadPassword: false
-        }
-    }
-    componentDidMount() {
+const Login = function({loginSuccess, setRoute}) {
+    
+    const [loginForm, setLoginForm] = useState({});
+    const [selfie, setSelfie] = useState({});
+    const [isPassword, setIsPassword] = useState(false);
+
+    const handleChange = e => {
+        setLoginForm({
+            ...loginForm,
+            [e.target.name]: e.target.value
+            })
+      }
+    const gpsFunction = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
-                this.setState({
+               setLoginForm({
+                   ...loginForm,
                    gps: `${position.coords.latitude}, ${position.coords.longitude}`
-               }) 
-                console.log(this.state.gps)
+               })
             });
         }
     }
-    handleChange = (e) => {
-        let { name, value } = e.target;
-        this.setState({
-            [name]: value
-        })
-    }
-    handleSubmit = async () => {
+    gpsFunction();
+    
+    const handleSubmit = async () => {
         
         const formData = new FormData();
-        formData.append('username', this.state.username);
-        formData.append('password', this.state.password);
-        formData.append('selfie', this.state.selfie[0]);
-        formData.append('gps', this.state.gps);
-        console.log(this.state);
+        formData.append('username', loginForm.username);
+        formData.append('password', loginForm.password);
+        formData.append('selfie', selfie.selfie[0]);
+        formData.append('gps', loginForm.gps);
+        console.log(loginForm);
         
         const response = await fetch('http://localhost:3000/login', {
             method: 'POST',
             body: formData
         });
-        if(response.status === 401) {
-            this.setState({
-                isBadPassword: true
-            })
-        }else if(response.status === 200) {
-            this.props.loginSuccess(this.state)
+        if (response.status === 401) {
+            setIsPassword(true);
+        } else if (response.status === 200) {
+            loginSuccess(loginForm)
         }
         console.log(response);
         
     }
-    handleImage = (e) => {
-        this.setState({
-            selfie: e.target.files
-        })
-    }
-    render() {
+    
         return(
             <main id="container">
                 <Header />
                 <h1>Login</h1>
                 <form method="post" id="login" className="col" encType="multipart/form-data">
                     <div className="col">
-                        <label for="username">Username:</label>
-                        <input onChange={this.handleChange} type="email" name="username" placeholder="Enter your email" value={this.state.username} required />
+                        <label htmlFor="username">Username:</label>
+                        <input onChange={handleChange} type="email" name="username" id="username" placeholder="Enter your email" value={loginForm.username} required />
                     </div>
                     <div className="col">
-                        <label for="password">Password:</label>
-                        <input onChange={this.handleChange} type="password" name="password" id="password" value={this.state.password} placeholder="Enter your password" required />
+                        <label htmlFor="password">Password:</label>
+                        <input onChange={handleChange} type="password" name="password" id="password" value={loginForm.password} placeholder="Enter your password" required />
                     </div>
                     <div className="col">
-                        <label for="selfie">Selfie:</label>
-                        <input onChange={this.handleImage} type="file" name="selfie" id="selfie" accept="image/png image/jpeg" className="btn" required />
+                        <label htmlFor="selfie">Selfie:</label>
+                        <input onChange={e => {setSelfie({selfie: e.target.files})}} type="file" name="selfie" id="selfie" accept="image/png image/jpeg" className="btn" required />
                     </div>
                     <div className="buttons">
-                        <input onChange={this.handleChange} type="hidden" name="gps" value={this.state.gps}/>
+                        <input onChange={loginForm.handleChange} type="hidden" name="gps" value={loginForm.gps}/>
                     </div>
                 </form>
-                <button className="btn" onClick={this.handleSubmit}>Login</button>
-                <div>{this.state.isBadPassword&&'Incorrect Password'}</div>
+                <button className="btn" onClick={handleSubmit}>Login</button>
+                <div>{isPassword && 'Incorrect Password'}</div>
                 <section className="login-button">
                     <p>Forgot your password?</p>
-                    <button onClick={() => this.props.setRoute('reset')} className="btn">Reset Password!</button>                   
+                    <button onClick={ () => setRoute('reset')} className="btn">Reset Password!</button>                   
                     <p>Don't have an account?</p>
-                    <button onClick={() => this.props.setRoute('signup')} className="btn">Sign up!</button>
+                    <button onClick={ () => setRoute('signup')} className="btn">Sign up!</button>
                     </section>
-                    <button onClick={ () => this.props.setRoute('error') }>
+                    <button onClick={ () => setRoute('error') }>
                     Error
                 </button>
             </main>
             )
-    }
-    
+
 }
 
 export default Login
