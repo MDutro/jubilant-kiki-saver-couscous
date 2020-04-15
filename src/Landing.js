@@ -3,11 +3,11 @@ import Header from './Header'
 import './App.css'
 import Section from './Section'
 
-function Main({onLogin}){
+function Main(props){
   return(
     <main>
-      <Header />
-      <Section onLogin={onLogin}/> 
+      <Header title={props.title}/>
+      <Section onLogin={props.onLogin}/> 
     </main>
   )
 }
