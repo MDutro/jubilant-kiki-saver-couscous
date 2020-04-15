@@ -1,24 +1,18 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
 import logo from './logo.png'
 
-function unstyledHeader(){
+
+function UnstyledHeader(props){
     return(
       <header id="banner">
         <img id="logo" src={logo} alt=""/>
-        <h1>
-        Welcome MS Coding Academy Students!
-        </h1>
+        <h1>{props.title}!</h1>
       </header>
     )
 }
 
-const Header = styled(unstyledHeader)`
-h1 {
-    color: #48A2B3;
-    text-align: center;
-    font-size: 3em;
-}
+const Header = styled(UnstyledHeader)`
 
 #banner, #one {
     display: flex;
@@ -28,6 +22,7 @@ h1 {
 
 #logo{
     margin: 0px auto;
+    height: 5vh
 }
 `
 

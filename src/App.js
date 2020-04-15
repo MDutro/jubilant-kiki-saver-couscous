@@ -1,61 +1,54 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Main from './Landing'
 import Login from './Login'
 import Success from './Success'
 import LoginError from './LoginError'
-import './index.css';
 import Signup from './Signup'
 import ResetPassword from './ResetPassword'
+import './index.css';
 
-class App extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            route: 'main',
-            user: null
-        }
-        this.initialState = this.state
+const App = function() {
+    const [route, setRoute] = useState('main');
+    const [user, setUser] = useState(null)
+    const [title, setTitle] = useState('');
+
+    const onSuccessfulLogin = user => {
+        setUser(user);
+        setRoute('success')
     }
 
-    setRoute = (newRoute) => {
-        this.setState({
-            route: newRoute
-        })
-    }
-
-    onSuccessfulLogin = (user) => {
-        this.setState({
-            user: user
-        })
-        this.setRoute('success')
-    }
-
-    onLogout = () => {
-        this.setState(() => {
-            return this.state.user = null
-        })
-        this.setRoute('main')
-        console.log(this.state)
+    const onLogout = () => {
+        setUser({user: null});
+        setRoute('main')
     }
     
-    render() {
-        switch (this.state.route) {
+
+    const handleTitleChange = e => {
+        setTitle({title: e.target.value})
+    }
+    
+    const renderSwitch = (route) => {
+        switch (route) {
             case 'main':
-                return <Main onLogin = { this.setRoute } /> 
+                return <Main onLogin = { setRoute } title="Welcome MS Coding Academy Students"/> 
             case 'success':
-                return <Success user = {this.state.user} onLogout = {this.onLogout} />
+                return <Success user = {user} onLogout = {onLogout} title="Login Successful"/>
             case 'login':
-                return <Login loginSuccess = {this.onSuccessfulLogin} setRoute={this.setRoute} /> 
+                return <Login loginSuccess = {onSuccessfulLogin} setRoute={setRoute} title="Login" /> 
             case 'error':
-                return <LoginError onLogin={this.setRoute} loginError = { this.setRoute } />
+                return <LoginError onLogin={setRoute} loginError = { setRoute } title="Login Unsuccessful"/>
             case 'signup':
-                return <Signup onSignup={this.setRoute} />
+                return <Signup onSignup={setRoute} setRoute={setRoute} title="Sign Up"/>
             case 'reset':
-                return <ResetPassword />    
+                return <ResetPassword setRoute={setRoute} title="Reset Password"/>    
             default :
                 return <div>404</div>
         }
     }
+
+    return(
+        <div>{renderSwitch(route)}</div> 
+    )
 }
 
 export default App;

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import Header from './Header'
 /* onSuccess, loginError */
-const Login = function({loginSuccess, setRoute}) {
+const Login = function(props) {
     
     const [loginForm, setLoginForm] = useState({});
     const [selfie, setSelfie] = useState({});
@@ -41,16 +41,13 @@ const Login = function({loginSuccess, setRoute}) {
         if (response.status === 401) {
             setIsPassword(true);
         } else if (response.status === 200) {
-            loginSuccess(loginForm)
+            props.loginSuccess(loginForm.username)
         }
-        console.log(response);
-        
+        console.log(response);  
     }
-    
         return(
             <main id="container">
-                <Header />
-                <h1>Login</h1>
+                <Header title={props.title} />
                 <form method="post" id="login" className="col" encType="multipart/form-data">
                     <div className="col">
                         <label htmlFor="username">Username:</label>
@@ -68,15 +65,15 @@ const Login = function({loginSuccess, setRoute}) {
                         <input onChange={loginForm.handleChange} type="hidden" name="gps" value={loginForm.gps}/>
                     </div>
                 </form>
-                <button className="btn" onClick={handleSubmit}>Login</button>
+                <button className="btn" onClick={handleSubmit}>Submit</button>
                 <div>{isPassword && 'Incorrect Password'}</div>
                 <section className="login-button">
                     <p>Forgot your password?</p>
-                    <button onClick={ () => setRoute('reset')} className="btn">Reset Password!</button>                   
+                    <button onClick={ () => props.setRoute('reset')} className="btn">Reset Password!</button>                   
                     <p>Don't have an account?</p>
-                    <button onClick={ () => setRoute('signup')} className="btn">Sign up!</button>
-                    </section>
-                    <button onClick={ () => setRoute('error') }>
+                    <button onClick={ () => props.setRoute('signup')} className="btn">Sign up!</button>
+                </section>
+                <button onClick={ () => props.setRoute('error') }>
                     Error
                 </button>
             </main>

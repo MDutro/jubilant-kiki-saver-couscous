@@ -10,7 +10,7 @@ body {
 h1 {
     color: #48A2B3;
     text-align: center;
-    font-size: 3em;
+    font-size: 2em;
 }
 
 input {
@@ -42,9 +42,6 @@ input[type=file] {
     width: minmax(300px, 0px)
 }
 
-#logo{
-    margin: 0px auto;
-}
 
 #selfie-jpeg{
     height: 25vh;
