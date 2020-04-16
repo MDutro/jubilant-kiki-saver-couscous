@@ -38,12 +38,13 @@ const Login = function(props) {
             method: 'POST',
             body: formData
         });
+        const body = await response.json();
         if (response.status === 401) {
             setIsPassword(true);
         } else if (response.status === 200) {
-            props.loginSuccess(loginForm.username)
+            props.loginSuccess(body.username, body.selfiePath)
         }
-        console.log(response);  
+        console.log(response);
     }
         return(
             <main id="container">
