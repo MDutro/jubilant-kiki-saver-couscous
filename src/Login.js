@@ -41,6 +41,12 @@ const Login = function(props) {
         if (response.status === 401) {
             setIsPassword(true);
         } else if (response.status === 200) {
+            const formData = new FormData();
+            formData.append('user', 1)
+            fetch('http://localhost:3000/attendance', {
+                method: 'POST',
+                body: formData
+            }).then(data => console.log(data))
             props.loginSuccess(loginForm.username)
         }
         console.log(response);  
