@@ -30,32 +30,41 @@ const App = function() {
     } */
 
     const renderSwitch = (route) => {
+        let pageRoute;
         switch (route) {
             case 'main':
-                return <Main onLogin = { setRoute }
-                title = "Welcome MS Coding Academy Students" / >
+                pageRoute = <Main onLogin={setRoute}
+                    title="Welcome MS Coding Academy Students" />
+                break;
             case 'success':
-                return <Success user = { user }
-                onLogout = { onLogout }
-                title = "Login Successful" / >
+                pageRoute = <Success user={user}
+                    onLogout={onLogout}
+                    title="Login Successful" />
+                break;
             case 'login':
-                return <Login loginSuccess = { onSuccessfulLogin }
-                setRoute = { setRoute }
-                title = "Login" / >
+                pageRoute = <Login loginSuccess={onSuccessfulLogin}
+                    setRoute={setRoute}
+                    title="Login" />
+                break;
             case 'error':
-                return <LoginError onLogin = { setRoute }
-                loginError = { setRoute }
-                title = "Login Unsuccessful" / >
+                pageRoute = <LoginError onLogin={setRoute}
+                    loginError={setRoute}
+                    title="Login Unsuccessful" />
+                break;
             case 'signup':
-                return <Signup onSignup = { setRoute }
-                setRoute = { setRoute }
-                title = "Sign Up" / >
+                pageRoute = <Signup onSignup={setRoute}
+                    setRoute={setRoute}
+                    title="Sign Up" />
+                break;
             case 'reset':
-                return <ResetPassword setRoute = { setRoute }
-                title = "Reset Password" / >
+                pageRoute = <ResetPassword setRoute={setRoute}
+                    title="Reset Password" />
+                break;
             default:
-                return <div> 404 </div>
+                pageRoute = <div> 404 </div>
+                break;
         }
+        return pageRoute;
     }
 
     return (

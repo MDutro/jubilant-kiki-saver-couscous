@@ -13,9 +13,9 @@ const Login = function(props) {
             [e.target.name]: e.target.value
             })
       }
-    const gpsFunction = () => {
+    const gpsFunction = async () => {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((position) => {
+            await navigator.geolocation.getCurrentPosition((position) => {
                setLoginForm({
                    ...loginForm,
                    gps: `${position.coords.latitude}, ${position.coords.longitude}`
@@ -23,10 +23,9 @@ const Login = function(props) {
             });
         }
     }
-    gpsFunction();
     
     const handleSubmit = async () => {
-        
+        await gpsFunction();
         const formData = new FormData();
         formData.append('username', loginForm.username);
         formData.append('password', loginForm.password);
@@ -60,18 +59,15 @@ const Login = function(props) {
                 <form method="post" id="login" className="col" encType="multipart/form-data">
                     <div className="col">
                         <label htmlFor="username">Username:</label>
-                        <input onChange={handleChange} type="email" name="username" id="username" placeholder="Enter your email" value={loginForm.username} required />
+                        <input onChange={handleChange} type="email" name="username" id="username" placeholder="Enter your email"  required />
                     </div>
                     <div className="col">
                         <label htmlFor="password">Password:</label>
-                        <input onChange={handleChange} type="password" name="password" id="password" value={loginForm.password} placeholder="Enter your password" required />
+                        <input onChange={handleChange} type="password" name="password" id="password" placeholder="Enter your password" required />
                     </div>
                     <div className="col">
                         <label htmlFor="selfie">Selfie:</label>
                         <input onChange={e => {setSelfie({selfie: e.target.files})}} type="file" name="selfie" id="selfie" accept="image/png image/jpeg" className="btn" required />
-                    </div>
-                    <div className="buttons">
-                        <input onChange={loginForm.handleChange} type="hidden" name="gps" value={loginForm.gps}/>
                     </div>
                 </form>
                 <button className="btn" onClick={handleSubmit}>Submit</button>
