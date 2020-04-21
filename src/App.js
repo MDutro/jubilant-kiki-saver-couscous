@@ -10,7 +10,7 @@ import './index.css';
 const App = function() {
     const [route, setRoute] = useState('main');
     const [user, setUser] = useState(null)
-    const [title, setTitle] = useState('');
+    //const [title, setTitle] = useState('');
 
     const onSuccessfulLogin = (username, selfiePath) => {
         setUser([
@@ -25,9 +25,9 @@ const App = function() {
         setRoute('main')
     }
 
-    const handleTitleChange = e => {
+    /* const handleTitleChange = e => {
         setTitle({ title: e.target.value })
-    }
+    } */
 
     const renderSwitch = (route) => {
         switch (route) {
