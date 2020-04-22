@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './Header';
 
 const ChangePassword = (props) => {
 
-  const[passwordForm, setPasswordForm] = useState({});
+  const [passwordForm, setPasswordForm] = useState({});
+  
 
   const handleChange = e => {
     setPasswordForm({
         ...passwordForm,
         [e.target.name]: e.target.value
         })
+  }
+
+  useEffect(() => { fetchUser() }, [] )
+
+  const fetchUser = async () => {
+    const response = await fetch(`http://localhost:3000/user/magic/${props.magic}`)
+    console.log(response);
   }
 
   const handleSubmit = async () => {

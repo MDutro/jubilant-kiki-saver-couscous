@@ -12,6 +12,7 @@ import './index.css';
 const App = function() {
     const [route, _setRoute] = useState('main');
     const [user, setUser] = useState(null)
+    const [magic, setMagic] = useState('')
     //const [title, setTitle] = useState('');
     const setRoute = (route) => {
         //sideeffects
@@ -32,7 +33,7 @@ const App = function() {
         setRoute('main')
     }
     useEffect(() => {
-        Router(route, setRoute, window.location.href)
+        Router(route, setRoute, window.location.href, setMagic)
     }, [])
     /* const handleTitleChange = e => {
         setTitle({ title: e.target.value })
@@ -70,7 +71,7 @@ const App = function() {
                     title="Reset Password" />
                 break;
             case 'changePass':
-                pageRoute = <ChangePassword setRoute={setRoute}
+                pageRoute = <ChangePassword setRoute={setRoute} magic={magic}
                     title="Change Password" />
                 break;
             default:
