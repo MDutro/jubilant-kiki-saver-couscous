@@ -1,4 +1,4 @@
-#KikiSaver Frontend
+# KikiSaver - Frontend
 
 This repo is the front end for the Mississppi Coding Academy attendance application. 
 
