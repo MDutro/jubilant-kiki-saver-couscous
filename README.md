@@ -7,18 +7,6 @@ The app is written in React with Hooks and is the collective effort of the MS Co
 The server can be found ![here](https://github.com/leviking/KikiSaver)
 
 
-## Screenshots
-
-### _Landing Page_
-*Desktop Landing*
-
-![landingPage](public/images/desktop.png)
-
-*Mobile Landing*
-
-![landingPage](public/images/responsive.png)
-
-
 ## Requirements
 
 1. Automate roll taking for MS Coding Academy
