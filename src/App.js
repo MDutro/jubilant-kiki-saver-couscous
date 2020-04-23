@@ -49,6 +49,7 @@ const App = function() {
             case 'success':
                 pageRoute = <Success user={user}
                     onLogout={onLogout}
+                    setRoute={setRoute}
                     title="Login Successful" />
                 break;
             case 'login':
@@ -71,7 +72,9 @@ const App = function() {
                     title="Reset Password" />
                 break;
             case 'changePass':
-                pageRoute = <ChangePassword setRoute={setRoute} magic={magic}
+                pageRoute = <ChangePassword setRoute={setRoute} 
+                    user={user}
+                    magic={magic}
                     title="Change Password" />
                 break;
             default:
