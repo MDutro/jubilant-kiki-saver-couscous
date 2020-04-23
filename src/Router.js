@@ -1,4 +1,4 @@
-const Router = (currentRoute, setRoute, url, setMagic) => {
+const Router = (currentRoute, setRoute, replaceRoute, url, setMagic) => {
     
     //check url
     const urlArray = url.split('/')
@@ -8,7 +8,7 @@ console.log(url);
 
     if (endpoint == 'changePass' && arg) {
         setMagic(arg)
-        setRoute(endpoint)
+        replaceRoute(endpoint)
     }
     if (currentRoute != endpoint) {
         setRoute(endpoint)

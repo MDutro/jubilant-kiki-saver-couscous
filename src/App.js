@@ -20,6 +20,11 @@ const App = function() {
        window.history.pushState(null, route, route)
     }
 
+    const resetRoute = (route) => {
+        _setRoute(route)
+        window.history.replaceState(null,'', `http://localhost:3001/${route}`)
+    }
+
     const onSuccessfulLogin = (username, selfiePath) => {
         setUser([
             ['username', username],
@@ -33,7 +38,7 @@ const App = function() {
         setRoute('main')
     }
     useEffect(() => {
-        Router(route, setRoute, window.location.href, setMagic)
+        Router(route, setRoute, resetRoute, window.location.href, setMagic)
     }, [])
     /* const handleTitleChange = e => {
         setTitle({ title: e.target.value })
