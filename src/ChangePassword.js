@@ -5,7 +5,6 @@ const ChangePassword = (props) => {
 
   const [passwordForm, setPasswordForm] = useState({});
   
-
   const handleChange = e => {
     setPasswordForm({
         ...passwordForm,
@@ -39,10 +38,13 @@ const ChangePassword = (props) => {
     return(
       <div id="container">
         <Header title={props.title} />
-        <div className="col">
-          <label for="oldPassword">Old Password:</label>
-          <input onChange={handleChange} type="password" name="oldPassword" id="oldPassword" placeholder="Enter your old password" required />
-        </div>
+        {
+          props.user && 
+            <div className="col">
+              <label for="oldPassword">Old Password:</label>
+              <input onChange={handleChange} type="password" name="oldPassword" id="oldPassword" placeholder="Enter your old password" required />
+            </div>
+        }
 
         <div className="col">
           <label for="newPassword">New Password:</label>
