@@ -25,10 +25,11 @@ const App = function() {
         window.history.replaceState(null,'', `http://localhost:3001/${route}`)
     }
 
-    const onSuccessfulLogin = (username, selfiePath) => {
+    const onSuccessfulLogin = (firstName, selfiePath, username) => {
         setUser([
-            ['username', username],
-            ['selfiePath', selfiePath]
+            ['firstName', firstName],
+            ['selfiePath', selfiePath],
+            ['username', username]
         ]);
         setRoute('success')
     }
@@ -78,7 +79,7 @@ const App = function() {
                 break;
             case 'changePass':
                 pageRoute = <ChangePassword setRoute={setRoute} 
-                    user={user}
+                    user={user[2][1]}
                     magic={magic}
                     title="Change Password" />
                 break;
@@ -89,7 +90,7 @@ const App = function() {
         return pageRoute;
     }
     //console.log(window.location.href.split('/').pop());
-    
+    console.log(user)
     return (
         <div> {renderSwitch(route)}  </div> 
     )
