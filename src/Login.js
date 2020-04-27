@@ -42,14 +42,14 @@ const Login = function(props) {
             setIsPassword(true);
         } else if (response.status === 200) {
             
-            const formData = new FormData();
+            /* const formData = new FormData();
             formData.append('user', 1)
             fetch('http://localhost:3000/attendance', {
                 method: 'POST',
                 body: formData
-            }).then(data => console.log(data))
+            }).then(data => console.log(data)) */
             
-            props.loginSuccess(body.username, body.selfiePath)
+            props.loginSuccess(body.username, body.selfiePath, loginForm.username)
         }
         console.log(response);
     }

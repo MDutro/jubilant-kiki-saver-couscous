@@ -22,15 +22,22 @@ const ChangePassword = (props) => {
   const handleSubmit = async () => {
     
     const formData = new FormData();
+        formData.append('username', props.user);
         formData.append('oldPassword', passwordForm.oldPassword);
         formData.append('newPassword', passwordForm.newPassword);
         formData.append('verifyPassword', passwordForm.verifyPassword);
+        formData.append('magic', props.magic)
         console.log(passwordForm);
 
-        const response = await fetch('http://localhost:3000/change', {
+        const response = await fetch('http://localhost:3000/changePass', {
             method: 'POST',
             body: formData
         });
+    if (response.status == 403) {
+      alert('Oops theres a problem with your link! Please submit a password reset request again!')
+    } else if (response.status == 200) {
+      alert('Your password has been successfully updated!')
+    }
         console.log(response);
   }
 
