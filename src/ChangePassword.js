@@ -33,10 +33,11 @@ const ChangePassword = (props) => {
             method: 'POST',
             body: formData
         });
-    if (response.status == 403) {
+    if (response.status === 403) {
       alert('Oops theres a problem with your link! Please submit a password reset request again!')
-    } else if (response.status == 200) {
+    } else if (response.status === 200) {
       alert('Your password has been successfully updated!')
+      props.setRoute('success')
     }
         console.log(response);
   }
