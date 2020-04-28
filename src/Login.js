@@ -13,6 +13,17 @@ const Login = function(props) {
             [e.target.name]: e.target.value
             })
       }
+
+    const handlePasswordChange = e => {
+        const basePassword = new Buffer(e.target.value).toString('base64')
+        setLoginForm({
+            ...loginForm,
+            password : basePassword
+            })
+        
+
+    }
+
     const gpsFunction = async () => {
         if (navigator.geolocation) {
             await navigator.geolocation.getCurrentPosition((position) => {
@@ -63,7 +74,7 @@ const Login = function(props) {
                     </div>
                     <div className="col">
                         <label htmlFor="password">Password:</label>
-                        <input onChange={handleChange} type="password" name="password" id="password" placeholder="Enter your password" required />
+                        <input onChange={handlePasswordChange} type="password" name="password" id="password" placeholder="Enter your password" required />
                     </div>
                     <div className="col">
                         <label htmlFor="selfie">Selfie:</label>
