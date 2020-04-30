@@ -6,9 +6,10 @@ const ChangePassword = (props) => {
   const [passwordForm, setPasswordForm] = useState({});
   
   const handleChange = e => {
+    const basePassword = new Buffer(e.target.value).toString('base64')
     setPasswordForm({
         ...passwordForm,
-        [e.target.name]: e.target.value
+        [e.target.name]: basePassword
         })
   }
 
