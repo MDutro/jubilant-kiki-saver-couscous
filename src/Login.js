@@ -20,8 +20,6 @@ const Login = function(props) {
             ...loginForm,
             password : basePassword
             })
-        
-
     }
 
     const gpsFunction = async () => {

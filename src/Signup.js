@@ -11,7 +11,14 @@ const Signup = function(props) {
             [e.target.name]: e.target.value
             })
     }
-    console.log(signUpForm);
+
+    const handlePasswordChange = e => {
+        const basePassword = new Buffer(e.target.value).toString('base64')
+        setSignUpForm({
+            ...signUpForm,
+            password : basePassword
+            })
+    }
 
     const handleSubmit = async (e) => {
         
@@ -40,7 +47,7 @@ const Signup = function(props) {
                     </div>
                     <div className="col">
                         <label for="password">Password:</label>
-                        <input onChange={handleChange} type="password" name="password" id="password" placeholder="Enter your password" value={signUpForm.password} required />
+                        <input onChange={handlePasswordChange} type="password" name="password" id="password" placeholder="Enter your password" required />
                     </div>
                     <div className="col">
                         <label for="verifyPassword">Password Confirmation:</label>
@@ -63,7 +70,8 @@ const Signup = function(props) {
                     className="btn" 
                     style={(checkPassword() && signUpForm.password)? undefined :{'background': 'palevioletred'}}
                     onClick={handleSubmit} 
-                    disabled={signUpForm.password !== signUpForm.verifyPassword}>
+                    // disabled={signUpForm.password !== signUpForm.verifyPassword}>
+                    >
                     {(checkPassword() && signUpForm.password)?'Submit':'Passwords Must Match'}
                 </button>
                 <p>Already have an account?</p>
