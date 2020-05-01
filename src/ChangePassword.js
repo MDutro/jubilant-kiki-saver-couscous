@@ -38,9 +38,8 @@ const ChangePassword = (props) => {
       alert('Oops theres a problem with your link! Please submit a password reset request again!')
     } else if (response.status === 200) {
       alert('Your password has been successfully updated!')
-      props.setRoute('success')
+      props.setRoute('login')
     }
-        console.log(response);
   }
 
 

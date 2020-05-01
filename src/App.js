@@ -79,7 +79,7 @@ const App = function() {
                 break;
             case 'changePass':
                 pageRoute = <ChangePassword setRoute={setRoute} 
-                    user={user[2][1]}
+                    user={user && user[2][1]}
                     magic={magic}
                     title="Change Password" />
                 break;
