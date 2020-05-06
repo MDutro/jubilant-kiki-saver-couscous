@@ -21,20 +21,23 @@ const Login = function(props) {
             password : basePassword
             })
     }
+    useEffect( () => {
+        gpsFunction()
+    }, [])
 
     const gpsFunction = async () => {
         if (navigator.geolocation) {
             await navigator.geolocation.getCurrentPosition((position) => {
-               setLoginForm({
-                   ...loginForm,
-                   gps: `${position.coords.latitude}, ${position.coords.longitude}`
-               })
+                setLoginForm({
+                    ...loginForm,
+                    gps: `${position.coords.latitude}, ${position.coords.longitude}`
+                })
             });
         }
     }
-    
+        
     const handleSubmit = async () => {
-        await gpsFunction();
+        
         const formData = new FormData();
         formData.append('username', loginForm.username);
         formData.append('password', loginForm.password);
@@ -50,17 +53,11 @@ const Login = function(props) {
         if (response.status === 401) {
             setIsPassword(true);
         } else if (response.status === 200) {
-            
-            /* const formData = new FormData();
-            formData.append('user', 1)
-            fetch('http://localhost:3000/attendance', {
-                method: 'POST',
-                body: formData
-            }).then(data => console.log(data)) */
-            
+    
             props.loginSuccess(body.username, body.selfiePath, loginForm.username)
+
         }
-        console.log(response);
+        console.log(body);
     }
         return(
             <main id="container">

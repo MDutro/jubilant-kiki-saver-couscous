@@ -3,7 +3,6 @@ import Header, {title} from './Header'
 
 const Signup = function(props) {
     const [signUpForm, setSignUpForm] = useState({});
-    const [password, setPassword] = useState(true);
 
     const handleChange = e => {
         setSignUpForm({
@@ -16,7 +15,8 @@ const Signup = function(props) {
         const basePassword = new Buffer(e.target.value).toString('base64')
         setSignUpForm({
             ...signUpForm,
-            password : basePassword
+            password: basePassword,
+            passwordCheck: e.target.value
             })
     }
 
@@ -30,11 +30,17 @@ const Signup = function(props) {
         formData.append('lastName', signUpForm.lastName);
         formData.append('phone', signUpForm.phone);
         const response = await fetch('http://localhost:3000/signup', { method: 'POST', body: formData });
-        console.log(response);  
+        
+        if (response.status === 400) {
+            alert('That username is already taken! Please try again or try resetting your password!')
+        } else if (response.status === 200) {
+            alert('Sign Up Successful!')
+            props.setRoute('login')
+        }
     }
 
     const checkPassword = () => {
-       return signUpForm.password===signUpForm.verifyPassword
+       return signUpForm.passwordCheck===signUpForm.verifyPassword
     }
 
         return(
@@ -43,7 +49,7 @@ const Signup = function(props) {
                 <form method="post" id="signup">
                     <div className="col">
                         <label for="username">Username:</label>
-                        <input onChange={handleChange} type="email" name="username" id="username" placeholder="Enter your email" value={signUpForm.username} required />
+                        <input onChange={handleChange} type="email" name="username" id="username" placeholder="Enter your email" required />
                     </div>
                     <div className="col">
                         <label for="password">Password:</label>
@@ -51,26 +57,25 @@ const Signup = function(props) {
                     </div>
                     <div className="col">
                         <label for="verifyPassword">Password Confirmation:</label>
-                        <input onChange={handleChange} type="password" name="verifyPassword" id="verify-password" placeholder="Confirm your password" value={signUpForm.verifyPassword} required />
+                        <input onChange={handleChange} type="password" name="verifyPassword" id="verify-password" placeholder="Confirm your password" required />
                     </div>
                     <div className="col">
                         <label for="firstName">First Name:</label>
-                        <input onChange={handleChange} type="text" name="firstName" id="first-name" placeholder="Enter your first name" value={signUpForm.firstName} required />
+                        <input onChange={handleChange} type="text" name="firstName" id="first-name" placeholder="Enter your first name" required />
                     </div>
                     <div className="col">
                         <label for="lastName">Last Name:</label>
-                        <input onChange={handleChange} type="text" name="lastName" id="last-name" placeholder="Enter your last name" value={signUpForm.lastName} required />
+                        <input onChange={handleChange} type="text" name="lastName" id="last-name" placeholder="Enter your last name" required />
                     </div>
                     <div className="col">
                         <label for="phone">Phone:</label>
-                        <input onChange={handleChange} type="tel" name="phone" id="phone" placeholder="Enter a your phone number without hyphens" value={signUpForm.phone} required />
+                        <input onChange={handleChange} type="tel" name="phone" id="phone" placeholder="Enter a your phone number without hyphens" required />
                     </div>
                 </form>
                 <button 
                     className="btn" 
                     style={(checkPassword() && signUpForm.password)? undefined :{'background': 'palevioletred'}}
                     onClick={handleSubmit} 
-                    // disabled={signUpForm.password !== signUpForm.verifyPassword}>
                     >
                     {(checkPassword() && signUpForm.password)?'Submit':'Passwords Must Match'}
                 </button>
