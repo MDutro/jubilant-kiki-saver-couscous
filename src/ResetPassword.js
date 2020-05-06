@@ -14,7 +14,12 @@ function ResetPassword(props) {
       method: 'POST',
       body: formData
     });
-    console.log(response);
+    if (response.status !== 200) {
+      alert('There was an error! Please try again!')
+      return
+    }
+    alert(`We have sent a password reset link to your email at: ${email}!`)
+    props.setRoute('login')
   }
 
   return (

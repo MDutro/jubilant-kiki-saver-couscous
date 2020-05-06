@@ -49,6 +49,7 @@ const App = function() {
         let pageRoute;
         switch (route) {
             case 'main':
+            case '':
                 pageRoute = <Main onLogin={setRoute}
                     title="Welcome MS Coding Academy Students" />
                 break;
@@ -89,8 +90,7 @@ const App = function() {
         }
         return pageRoute;
     }
-    //console.log(window.location.href.split('/').pop());
-    console.log(user)
+    
     return (
         <div> {renderSwitch(route)}  </div> 
     )

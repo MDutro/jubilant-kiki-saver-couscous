@@ -84,9 +84,6 @@ const Login = function(props) {
                     <p>Don't have an account?</p>
                     <button onClick={ () => props.setRoute('signup')} className="btn">Sign up!</button>
                 </section>
-                <button onClick={ () => props.setRoute('error') }>
-                    Error
-                </button>
             </main>
             )
 
