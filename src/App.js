@@ -7,11 +7,11 @@ import Signup from './Signup'
 import ResetPassword from './ResetPassword'
 import ChangePassword from './ChangePassword'
 import Router from './Router'
+import UserStore from './UserStore'
 import './index.css';
 
 const App = function() {
     const [route, _setRoute] = useState('main');
-    const [user, setUser] = useState(null)
     const [magic, setMagic] = useState('')
     //const [title, setTitle] = useState('');
     const setRoute = (route) => {
@@ -26,16 +26,16 @@ const App = function() {
     }
 
     const onSuccessfulLogin = (firstName, selfiePath, username) => {
-        setUser([
-            ['firstName', firstName],
-            ['selfiePath', selfiePath],
-            ['username', username]
-        ]);
+        UserStore.dispatch({type: 'CREATE', 
+            user: {'firstName': firstName, 
+                'selfiePath': selfiePath, 
+                'username': username}
+        })
         setRoute('success')
     }
 
     const onLogout = () => {
-        setUser({ user: null });
+        UserStore.dispatch({type: 'DELETE'})
         setRoute('main')
     }
     useEffect(() => {
@@ -54,9 +54,9 @@ const App = function() {
                     title="Welcome MS Coding Academy Students" />
                 break;
             case 'success':
-                pageRoute = <Success user={user}
-                    onLogout={onLogout}
+                pageRoute = <Success onLogout={onLogout}
                     setRoute={setRoute}
+                    store={UserStore}
                     title="Login Successful" />
                 break;
             case 'login':
@@ -80,7 +80,7 @@ const App = function() {
                 break;
             case 'changePass':
                 pageRoute = <ChangePassword setRoute={setRoute} 
-                    user={user && user[2][1]}
+                    store={UserStore}
                     magic={magic}
                     title="Change Password" />
                 break;
@@ -90,6 +90,9 @@ const App = function() {
         }
         return pageRoute;
     }
+
+    UserStore.subscribe(() => console.log(UserStore.getState()));
+    // UserStore.dispatch({type: 'CREATE', user: 'eliot'})
     
     return (
         <div> {renderSwitch(route)}  </div> 

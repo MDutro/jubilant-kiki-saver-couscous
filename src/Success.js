@@ -9,8 +9,8 @@ function Success(props) {
     return(
       <main id="container">
         <Header title={props.title} />
-        <p>{`Hey ${props.user[0][1]}! Your attendance has been logged at ${timeInHours}:${timeInMinutes} ${timeOfDay}`}</p>
-        <img src={`http://localhost:3000${props.user[1][1]}`} alt="Your uploaded selfie" width="520" height="auto" />
+        <p>{`Hey ${props.store.getState().user.firstName}! Your attendance has been logged at ${timeInHours}:${timeInMinutes} ${timeOfDay}`}</p>
+        <img src={`http://localhost:3000${props.store.getState().user.selfiePath}`} alt="Your uploaded selfie" width="520" height="auto" />
         <button className="btn" onClick={() =>props.setRoute('changePass')}>
             Change Password
         </button>

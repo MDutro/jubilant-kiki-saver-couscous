@@ -23,7 +23,7 @@ const ChangePassword = (props) => {
   const handleSubmit = async () => {
     
     const formData = new FormData();
-        formData.append('username', props.user);
+        formData.append('username', props.store.getState().user.username);
         formData.append('oldPassword', passwordForm.oldPassword);
         formData.append('newPassword', passwordForm.newPassword);
         formData.append('verifyPassword', passwordForm.verifyPassword);
@@ -47,7 +47,7 @@ const ChangePassword = (props) => {
       <div id="container">
         <Header title={props.title} />
         {
-          props.user && 
+          props.store.getState().user && 
             <div className="col">
               <label for="oldPassword">Old Password:</label>
               <input onChange={handleChange} type="password" name="oldPassword" id="oldPassword" placeholder="Enter your old password" required />

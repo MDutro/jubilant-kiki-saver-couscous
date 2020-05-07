@@ -7,7 +7,9 @@ function user(state={}, action) {
         user: action.user
       })
     case 'DELETE':
-      return Object.assign({}, state, {})
+      return Object.assign({}, state, {
+        user: null
+      })
     default :
       console.log("Default!")
   }
