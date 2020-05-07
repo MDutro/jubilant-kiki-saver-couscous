@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import Header, {title} from './Header'
+import SignupStore from './SignupStore'
 
 const Signup = function(props) {
     const [signUpForm, setSignUpForm] = useState({});
-
+    SignupStore.subscribe(() => console.log((SignupStore.getState())));
     const handleChange = e => {
-        setSignUpForm({
+        SignupStore.dispatch({type: 'CREATE', 
+        signUpForm: {
             ...signUpForm,
-            [e.target.name]: e.target.value
-            })
+            [e.target.name]: e.target.value} 
+        })
     }
 
     const handlePasswordChange = e => {
@@ -17,7 +19,7 @@ const Signup = function(props) {
             ...signUpForm,
             password: basePassword,
             passwordCheck: e.target.value
-            })
+        })
     }
 
     const handleSubmit = async (e) => {

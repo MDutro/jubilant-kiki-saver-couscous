@@ -92,7 +92,6 @@ const App = function() {
     }
 
     UserStore.subscribe(() => console.log(UserStore.getState()));
-    // UserStore.dispatch({type: 'CREATE', user: 'eliot'})
     
     return (
         <div> {renderSwitch(route)}  </div> 
