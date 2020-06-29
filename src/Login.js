@@ -1,19 +1,41 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useMemo} from 'react'
 import Header from './Header'
 import UserStore from './UserStore'
 /* onSuccess, loginError */
-const Login = function(props) {
+const Login = React.memo(function(props) {
     
     const [loginForm, setLoginForm] = useState({});
     const [selfie, setSelfie] = useState({});
-    const [isPassword, setIsPassword] = useState(false);
+    const [selfieFilename, setSelfieFilename] = useState('');
+    const [isPassword, setIsPassword] = useState('');
 
     const handleChange = e => {
         setLoginForm({
             ...loginForm,
             [e.target.name]: e.target.value
             })
-      }
+        }
+    const getFilename = async () => {
+    const fullPath = document.getElementById('selfie')?.value;
+    if (fullPath) {
+        const startIndex = (fullPath.indexOf('\\') >= 0 ? (fullPath.lastIndexOf('\\')+1) : fullPath.lastIndexOf('/'));
+        let filename = fullPath.substring(startIndex);
+        if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+            filename = filename.substring(2);
+        }
+        setSelfieFilename(filename);
+        console.log(filename)
+    }
+    }
+
+    const handleSelfieChange = e => {
+    setSelfie({selfie: e.target.files})
+    setLoginForm({
+        ...loginForm,
+        selfie: selfie
+        });
+    getFilename();
+    }
 
     const handlePasswordChange = e => {
         const basePassword = new Buffer(e.target.value).toString('base64')
@@ -60,7 +82,12 @@ const Login = function(props) {
         }
         console.log(body);
     }
-        return(
+
+   
+
+
+
+    return(
             <main id="container">
                 <Header title={props.title} />
                 <form method="post" id="login" className="col" encType="multipart/form-data">
@@ -73,8 +100,14 @@ const Login = function(props) {
                         <input onChange={handlePasswordChange} type="password" name="password" id="password" placeholder="Enter your password" required />
                     </div>
                     <div className="col">
-                        <label htmlFor="selfie">Selfie:</label>
-                        <input onChange={e => {setSelfie({selfie: e.target.files})}} type="file" name="selfie" id="selfie" accept="image/png image/jpeg" className="btn" required />
+                        <input onChange={handleSelfieChange} type="file" name="selfie" id="selfie" accept="image/png image/jpeg" className="btn" required />
+                        <label htmlFor="selfie" className='btn'>
+                            <i className="material-icons material-font-size">
+                                add_photo_alternate
+                            </i> &nbsp;
+                            Choose Selfie
+                        </label>
+                        <p id='selfie-filename'>{(selfieFilename) ? <strong>{selfieFilename}</strong> : 'No Selfie Chosen'}</p>
                     </div>
                 </form>
                 <button className="btn" onClick={handleSubmit}>Submit</button>
@@ -88,6 +121,7 @@ const Login = function(props) {
             </main>
             )
 
-}
+
+});
 
 export default Login
